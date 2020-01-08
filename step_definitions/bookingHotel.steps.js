@@ -123,10 +123,10 @@ Then(/^I enter valid booking information$/, () => {
     `Couldn't find booking form`
   );
 
-  bookingPage.bookingFirstNameInputField.setValue(firstName);
-  bookingPage.bookingLastNameInputField.setValue(lastName);
-  bookingPage.bookingEmailInputField.setValue(email);
-  bookingPage.bookingMobileInputField.setValue(mobile);
+  bookingPage.bookingFirstNameInputField.setValue("TDL_TEST_NAME_1980");
+  bookingPage.bookingLastNameInputField.setValue("TDL_TEST_LASTNAME_1999");
+  bookingPage.bookingEmailInputField.setValue("tdl_test_email_000@gmail.com");
+  bookingPage.bookingMobileInputField.setValue(Math.floor(Math.random() * 1000000000));
 
   bookingPage.countrySelectionDropdown.click();
   bookingPage.countrySearchBox.setValue("Latvia");
