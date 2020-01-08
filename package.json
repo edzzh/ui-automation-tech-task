@@ -8,7 +8,7 @@
     "selenium:install": "node_modules/.bin/selenium-standalone install",
     "selenium:start": "node_modules/.bin/selenium-standalone start",
     "selenium": "npm run selenium:install && npm run selenium:start",
-    "allure": "allure generate allure-results && allure open"
+    "allure": "allure generate allure-results"
   },
   "keywords": [],
   "author": "Edgars Hartmanis",
