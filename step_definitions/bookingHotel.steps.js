@@ -1,5 +1,7 @@
 import { Given, When, Then } from "cucumber";
 import bookingPage from '../page_objects/BookingPage';
+import assert from "assert";
+
 let hotelPrice = null;
 
 When(/^I set up destination as "([^"]*)"$/, (destination) => {

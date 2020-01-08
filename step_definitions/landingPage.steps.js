@@ -3,6 +3,7 @@ import landingPage from "../page_objects/LandingPage";
 import signUpPage from "../page_objects/SignUpPage";
 import accountPage from "../page_objects/AccountPage";
 import loginPage from "../page_objects/LoginPage";
+import assert from "assert";
 
 Given(/^I am on landing page of PHPTRAVELS$/, () => {
   landingPage.open();

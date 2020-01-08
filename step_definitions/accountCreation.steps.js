@@ -1,5 +1,6 @@
 import { Given, When, Then } from "cucumber";
 import uuid from "uuid/v4";
+import assert from "assert";
 import signUpPage from '../page_objects/SignUpPage';
 import accountPage from '../page_objects/AccountPage';
 
