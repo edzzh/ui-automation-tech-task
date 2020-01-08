@@ -1,5 +1,6 @@
 import { Given, When, Then } from "cucumber";
 import bookingPage from '../page_objects/BookingPage';
+let hotelPrice = null;
 
 When(/^I set up destination as "([^"]*)"$/, (destination) => {
   bookingPage.destinationInput.click();

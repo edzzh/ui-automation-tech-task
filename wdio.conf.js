@@ -1,6 +1,5 @@
 const { removeSync } = require('fs-extra');
 const defaultTimeoutInterval = process.env.DEBUG ? (60 * 60 * 500) : 60000;
-const uuid = require("uuid/v4");
 
 exports.config = {
     runner: 'local',
@@ -124,20 +123,6 @@ exports.config = {
       global.expect = chai.expect;
       global.assert = chai.assert;
       global.should = chai.should();
-
-      // Global Test Data
-      global.firstName = "TDL_TEST_NAME_1980";
-      global.lastName = "TDL_TEST_LASTNAME_1999";
-      global.mobile = "37188886666";
-      global.email = "tdl_test_email_000@gmail.com";
-      global.password = "Password1234";
-      global.hotelPrice = null;
-
-      // Mock Data For Account Creation
-      global.mockFirstName = `name-${uuid().substring(0,8)}`;
-      global.mockLastName = `lastname-${uuid().substring(0,8)}`;
-      global.mockEmail = `email-${uuid().substring(0,8)}@gmail.com`;
-      global.mockMobile = Math.floor(Math.random() * 1000000000);
     },
     //
     // after: function (capabilities, specs) {

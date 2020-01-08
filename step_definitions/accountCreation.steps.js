@@ -2,6 +2,12 @@ import { Given, When, Then } from "cucumber";
 import signUpPage from '../page_objects/SignUpPage';
 import accountPage from '../page_objects/AccountPage';
 
+// Mock Test Data
+const mockFirstName = `name-${uuid().substring(0,8)}`;
+const mockLastName = `lastname-${uuid().substring(0,8)}`;
+const mockEmail = `email-${uuid().substring(0,8)}@gmail.com`;
+const mockMobile = Math.floor(Math.random() * 1000000000);
+
 When(/^I valid user details in Register section$/, () => {
   signUpPage.firstNameInput.waitForDisplayed(
     5000,
