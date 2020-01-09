@@ -8,7 +8,7 @@ exports.config = {
     path: '/wd/hub',
 
     specs: [
-        './features/hotel-booking.feature',
+        './features/*.feature',
     ],
 
     exclude: [],
