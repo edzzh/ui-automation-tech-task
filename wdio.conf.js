@@ -1,5 +1,5 @@
 const { removeSync } = require('fs-extra');
-const defaultTimeoutInterval = process.env.DEBUG ? (60 * 60 * 500) : 60000;
+const defaultTimeoutInterval = process.env.DEBUG ? (60 * 60 * 500) : 90000;
 
 exports.config = {
     runner: 'local',
@@ -9,7 +9,7 @@ exports.config = {
     path: '/wd/hub',
 
     specs: [
-        './features/*.feature',
+        './features/cheapest-hotel-booking.feature',
     ],
     // Patterns to exclude.
     exclude: [
@@ -55,7 +55,7 @@ exports.config = {
     // Set a base URL in order to shorten url command calls. If your url parameter starts
     // with "/", then the base url gets prepended.
     baseUrl: '/',
-    waitforTimeout: 60000,            // Default timeout for all waitFor* commands.
+    waitforTimeout: 90000,            // Default timeout for all waitFor* commands.
     connectionRetryTimeout: 90000,    // Default timeout in milliseconds for request  if Selenium Grid doesn't send response
     connectionRetryCount: 3,          // Default request retries count
 

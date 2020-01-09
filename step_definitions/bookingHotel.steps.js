@@ -159,5 +159,53 @@ Then(/^"Purchase hotel booking" page is displayed$/, () => {
 });
 
 When(/^I click on Details for the cheapest hotel in the list with a rating above "([^"]*)" stars$/, (rating) => {
+  while (bookingPage.viewMoreHotelsButton.isDisplayed()) {
+    bookingPage.viewMoreHotelsButton.waitForDisplayed(
+      2000,
+      false,
+      `View More button is not visible`
+    );
+    bookingPage.viewMoreHotelsButton.click();
+  }
+
+  const hotelResults = [...bookingPage.hotelResultList.$$('li')];
+
+  // Store hotel names with 3 or above stars
+  let hotelsThreeStarsOrAbove = [];
+  hotelResults.map(hotel => {
+    if (parseInt(hotel.$('div[class="rating-item rating-sm rating-inline"] > p > span').getText().substring(0,1)) > rating) {
+      hotelsThreeStarsOrAbove.push(hotel.$('div[class="rtl-mr-auto"] > h5 > a').getText());
+    }
+  });
+
+  // Store all available hotel prices
+  // Due to 155 RIGA records, I only went through 20 on every iteration
+  let hotelPrices = [];
+  for (let i = 0; i < hotelsThreeStarsOrAbove.length; i++) {
+    for (let j = 0; j < 20; j++) {
+      if (hotelsThreeStarsOrAbove[i] === hotelResults[j].$('div[class="rtl-mr-auto"] > h5 > a').getText()) {
+        hotelPrices.push(parseFloat(hotelResults[j].$('div[class="price"] > span').getText().substring(4)));
+      }
+    }
+  }
+
+  // Get Lowest Hotel Price
+  const lowestHotelPrice = Math.min.apply(Math, hotelPrices);
+  console.log(lowestHotelPrice);
+
+  // Get the cheapest hotel by the definition
+  let cheapestHotels = [];
+  for (let i = 0; i < hotelResults.length; i++) {
+    if (parseFloat(hotelResults[i].$('div[class="price"] > span').getText().substring(4)) === lowestHotelPrice) {
+      cheapestHotels.push(hotelResults[i]);
+    }
+  }
+
+  // Scroll To The Element
+  cheapestHotels[0].$('button').scrollIntoView({behavior: "auto", block: "end", inline: "end"});
+  cheapestHotels[0].$('button').click();
+});
+
+When(/^I click on "Book now" button for the cheapest available room in the hotel$/, () => {
 
 });

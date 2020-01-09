@@ -23,6 +23,8 @@ class BookingPage extends Page{
   get hotelsSearchButton () { return $('//form[@name="HOTELS"]//button[contains(text(),"Search")]');}
   get hotelResultList () { return $('ul[id="LIST"]')}
   get hotelDetailHeader () { return $('div[class="detail-header"]'); }
+  get viewMoreHotelsButton () { return $('button[id="loadMore"]'); }
+  get hotelResultPrices () { return $('div[class="price"] > span'); }
 
   get availableRoomsButton () { return $('//ul[@id="horizon-sticky-nav"]//li/a[text()="Available Rooms"]'); }
   get hotelRoomBookButton () { return $('//div[@class="room-item-wrapper"]/div[2]//button[text()="Book Now"]'); }
