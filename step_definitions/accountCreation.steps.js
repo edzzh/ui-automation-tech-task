@@ -14,7 +14,7 @@ When(/^I valid user details in Register section$/, () => {
   signUpPage.firstNameInput.waitForDisplayed(
     5000,
     false,
-    `Couldn't find First Name input`
+    `First Name Input is not displayed`
   );
 
   signUpPage.firstNameInput.setValue(mockFirstName);
@@ -22,7 +22,7 @@ When(/^I valid user details in Register section$/, () => {
   signUpPage.lastNameInput.waitForDisplayed(
     5000,
     false,
-    `Couldn't find Last Name input`
+    `Last Name Input is not displayed`
   );
 
   signUpPage.lastNameInput.setValue(mockLastName);
@@ -30,7 +30,7 @@ When(/^I valid user details in Register section$/, () => {
   signUpPage.mobileNumberInput.waitForDisplayed(
     5000,
     false,
-    `Couldn't find Mobile Number input`
+    `Mobile Number Input is not displayed`
   );
 
   signUpPage.mobileNumberInput.setValue(mockMobile.toString());
@@ -38,7 +38,7 @@ When(/^I valid user details in Register section$/, () => {
   signUpPage.emailInput.waitForDisplayed(
     5000,
     false,
-    `Couldn't find Email input`
+    `Email Input is not displayed`
   );
 
   signUpPage.emailInput.setValue(mockEmail);
@@ -46,14 +46,14 @@ When(/^I valid user details in Register section$/, () => {
   signUpPage.passwordInput.waitForDisplayed(
     5000,
     false,
-    `Couldn't find Password input`
+    `Password Input is not displayed`
   );
   signUpPage.passwordInput.setValue("password123");
 
   signUpPage.confirmPasswordInput.waitForDisplayed(
     5000,
     false,
-    `Couldn't find Confirm Password input`
+    `Confirm Password Input is not displayed`
   );
   signUpPage.confirmPasswordInput.setValue("password123");
 });
@@ -74,7 +74,7 @@ When(/^My Account page is opened$/, () => {
   accountPage.accountName.waitForDisplayed(
     5000,
     false,
-    `Couldn't find account name field`
+    `Account Name Field is not displayed`
   );
 });
 
@@ -82,7 +82,7 @@ When(/^I click on “MY PROFILE” button$/, () => {
   accountPage.accountSideMenu.waitForDisplayed(
   5000,
   false,
-  `Couldn't find Account side menu`
+  `Account Side Menu is not displayed`
   );
 
   accountPage.myProfileButton.click();
@@ -91,7 +91,7 @@ When(/^I click on “MY PROFILE” button$/, () => {
 Then(/^“MY PROFILE” section is opened$/, () => {
   browser.waitUntil(() => {
     return accountPage.myProfileAccount.getText().includes("My Profile");
-  }, 5000, `Couldn't find My Profile form`);
+  }, 5000, `My Profile Form is not displayed`);
 });
 
 Then(/^correct personal information is displayed$/, () => {

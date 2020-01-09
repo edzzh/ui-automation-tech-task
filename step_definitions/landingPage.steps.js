@@ -10,7 +10,7 @@ Given(/^I am on landing page of PHPTRAVELS$/, () => {
   landingPage.landingPageLogo.waitForDisplayed(
     10000,
     false,
-    `Couldn't find Landing Page logo`
+    `Landing Page Logo is not diplayed`
   );
 
   if (landingPage.disableCookies.isDisplayed()) {
@@ -24,9 +24,10 @@ Then(/^I setup language property as "([^"]*)"$/, (languageValue) => {
     landingPage.languageDropdown.waitForDisplayed(
       5000,
       false,
-      `Couldn't find Lanugage Dropdown menu`
+      `Lanugage Dropdown Menu is not diplayed`
     );
 
+    // Select given lanugage
     landingPage.languageDropdown.$$('a').map(language => {
       if (language.getText() === languageValue) {
         language.click();
@@ -36,7 +37,7 @@ Then(/^I setup language property as "([^"]*)"$/, (languageValue) => {
     landingPage.activeLanguageAnchor.waitForDisplayed(
       10000,
       false,
-      `Couldn't find active language anchor`
+      `Active Language Anchor is not diplayed`
     );
 
     assert.strictEqual(
@@ -52,17 +53,23 @@ Then(/^setup currency property as "([^"]*)"$/, (currencyValue) => {
     landingPage.currencyDropdown.waitForDisplayed(
       5000,
       false,
-      `Couldn't find Currency Dropdown menu`
+      `Currency Dropdown Menu is not diplayed`
     );
 
+    // Select given currency
     landingPage.currencyDropdown.$$('a').map(currency => {
       if (currency.getText() === currencyValue) {
         currency.click();
       }
     });
 
+    const currencyLabel = {
+      EUR: "€",
+      USD: "$"
+    };
+
     browser.waitUntil(() => {
-      return landingPage.featuredToursFigureCurrencyCheck.getText().includes("€");
+      return landingPage.featuredToursFigureCurrencyCheck.getText().includes(currencyLabel[currencyValue.toUpperCase()]);
     }, 5000, `Tours is not converted in ${currencyValue}`);
   }
 });
@@ -72,9 +79,10 @@ Given(/^I am in Sign Up page$/, () => {
   landingPage.myAccountDropdown.waitForDisplayed(
     5000,
     false,
-    `Couldn't find My Account dropdown`
+    `My Account Dropdow is not displayed`
   );
 
+  // Select button equal to "Sign Up"
   landingPage.myAccountDropdown.$('div').$$('a').map(accountAction => {
     if (accountAction.getText() === 'Sign Up') {
       accountAction.click();
@@ -84,7 +92,7 @@ Given(/^I am in Sign Up page$/, () => {
   signUpPage.signUpForm.waitForDisplayed(
     5000,
     false,
-    `Couldn't find Register panel`
+    `Register Panel is not displayed`
   );
 });
 
@@ -92,18 +100,26 @@ Given(/^I have account created$/, () => {
   landingPage.myAccountButton.waitForDisplayed(
     5000,
     false,
-    `Couldn't find MY ACCOUNT button`
+    `MY ACCOUNT Button is not displayed`
   );
 
   landingPage.myAccountButton.click();
+
+  landingPage.myAccountDropdown.waitForDisplayed(
+    5000,
+    false,
+    `My Account Dropdow is not displayed`
+  );
+
   loginPage.loginButton.click();
 
   loginPage.loginForm.waitForDisplayed(
     5000,
     false,
-    `Couldn't fin Login Form`
+    `Login Form is not displayed`
   );
 
+  // Login with give demo test profile
   loginPage.loginEmailInputField.setValue("user@phptravels.com");
   loginPage.loginPasswordInputField.setValue("demouser");
   loginPage.loginUserButton.click();
@@ -113,7 +129,7 @@ Given(/^I have account created$/, () => {
   accountPage.accountName.waitForDisplayed(
     10000,
     false,
-    `Couldn't find account name field`
+    `Profile Name - Demo User is not displayed`
   );
 });
 
@@ -121,13 +137,13 @@ Given(/^I am in "Home" page$/, () => {
   landingPage.homePageButton.waitForDisplayed(
     5000,
     false,
-    `Couldn't find "Home" page button`
+    `"Home" Page Button is not displayed`
   );
 
   landingPage.homePageButton.click();
   landingPage.landingPageLogo.waitForDisplayed(
     7000,
     false,
-    `Couldn't find Landing Page logo`
+    `Landing Page Logo is not displayed`
   );
 });

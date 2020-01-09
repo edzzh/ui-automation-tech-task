@@ -9,7 +9,7 @@ class LoginPage extends Page{
     Initial Page Elements
    */
 
-  get loginButton () { return $('//div[@class="dropdown dropdown-login dropdown-tab show"]//a[text()="Login"]'); }
+  get loginButton () { return $('a[href$="login"]'); }
   get loginForm () { return $('form[id="loginfrm"]'); }
   get loginEmailInputField () { return $('input[name="username"]'); }
   get loginPasswordInputField () { return $('input[name="password"]'); }

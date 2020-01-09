@@ -42,6 +42,8 @@ When(/^I select "([^"]*)" adults and "([^"]*)" children$/, (adults, children) =>
     }
 
     adultsCount = bookingPage.adultsInput.getValue();
+
+    // Validate if Adults count is as expected
     assert.strictEqual(adultsCount, parseInt(adults));
   } else if (adultsCount > parseInt(adults)) {
     console.log('adults count is higher')
@@ -58,6 +60,8 @@ When(/^I select "([^"]*)" adults and "([^"]*)" children$/, (adults, children) =>
     }
 
     childCount = bookingPage.childrenInput.getValue();
+
+    // Validate if Children count is as expected
     assert.strictEqual(childCount.toString(), children);
   } else if (childCount > parseInt(children)) {
     console.log('child count is higher')
@@ -68,7 +72,7 @@ When(/^I click on "Search" button$/, () => {
   bookingPage.hotelsSearchButton.waitForDisplayed(
     5000,
     false,
-    `Couldn't find HOTELS Search button`
+    `HOTELS Search Button is not displayed`
   );
 
   bookingPage.hotelsSearchButton.click();
@@ -78,7 +82,7 @@ When(/^I click on "Details" for fist hotel in the list$/, () => {
   bookingPage.hotelResultList.waitForDisplayed(
     5000,
     false,
-    `Couldn't find HOTEL list`
+    `HOTEL List is not displayed`
   );
 
   bookingPage.hotelResultList.$$('li')[0].$('button').click();
@@ -88,7 +92,7 @@ When(/^"Details" page is opened for selected hotel$/, () => {
   bookingPage.hotelDetailHeader.waitForDisplayed(
     5000,
     false,
-    `Couldn't find Details header`
+    `Details Header is not displayed`
   );
 });
 
@@ -96,17 +100,18 @@ When(/^I click on "Book now" button for first available room$/, () => {
   bookingPage.availableRoomsButton.waitForDisplayed(
     10000,
     false,
-    `Couldn't find Available Rooms button`
+    `Available Rooms Button is not displayed`
   );
 
   bookingPage.availableRoomsButton.click();
 
+  // Save hotel price for later validation
   hotelPrice = bookingPage.firstHotelRoomPrice.getText();
 
   bookingPage.firstHotelRoomBookButton.waitForDisplayed(
     5000,
     false,
-    `Couldn't find BOOK button for first available room`
+    `BOOK Button for first available room is not displayed`
   );
 
   bookingPage.firstHotelRoomBookButton.click();
@@ -116,9 +121,10 @@ Then(/^"Checkout" page is displayed$/, () => {
   bookingPage.hotelDetails.waitForDisplayed(
     5000,
     false,
-    `Couldn't find hotel details`
+    `Hotel Details is not displayed`
   );
 
+  // Validate checkout page details
   assert.strictEqual(bookingPage.hotelCheckInDate.getText(), "2020-01-20");
   assert.strictEqual(bookingPage.hotelCheckOutDate.getText(), "2020-01-25");
   assert.strictEqual(bookingPage.hotelPriceCheck.getText(), `USD${hotelPrice}`);
@@ -128,7 +134,7 @@ Then(/^I enter valid booking information$/, () => {
   bookingPage.bookingForm.waitForDisplayed(
     5000,
     false,
-    `Couldn't find booking form`
+    `Booking Form is not displayed`
   );
 
   bookingPage.bookingFirstNameInputField.setValue("TDL_TEST_NAME_1980");
@@ -145,7 +151,7 @@ Then(/^I click on "COMPLETE BOOKING" button$/, () => {
   bookingPage.completeBookingButton.waitForDisplayed(
     5000,
     false,
-    `Couldn't find COMPLETE BOOKING button`
+    `COMPLETE BOOKING Button is not displayed`
   );
 
   bookingPage.completeBookingButton.click();
@@ -155,7 +161,7 @@ Then(/^"Purchase hotel booking" page is displayed$/, () => {
   bookingPage.purchaseBookingPage.waitForDisplayed(
     5000,
     false,
-    `Couldn't find Purchase Booking page`
+    `Purchase Booking Page is not displayed`
   );
 });
 
@@ -163,7 +169,7 @@ When(/^I click on Details for the cheapest hotel in the list with a rating above
   bookingPage.viewMoreHotelsButton.waitForDisplayed(
     5000,
     false,
-    `Couldn't find VIEW MORE button`
+    `VIEW MORE Button is not displayed`
   );
 
   bookingPage.viewMoreHotelsButton.scrollIntoView({behavior: "auto", block: "center", inline: "center"});
@@ -172,7 +178,7 @@ When(/^I click on Details for the cheapest hotel in the list with a rating above
     bookingPage.viewMoreHotelsButton.waitForDisplayed(
       2000,
       false,
-      `View More button is not visible`
+      `View More button is not displayed`
     );
     bookingPage.viewMoreHotelsButton.click();
   }
@@ -218,7 +224,7 @@ When(/^I click on "Book now" button for the cheapest available room in the hotel
   bookingPage.availableRoomsButton.waitForDisplayed(
     10000,
     false,
-    `Couldn't find Available Rooms button`
+    `Available Rooms Button is not displayed`
   );
 
   bookingPage.availableRoomsButton.click();

@@ -9,7 +9,7 @@ exports.config = {
     path: '/wd/hub',
 
     specs: [
-        './features/*.feature',
+        './features/account-creation.feature',
     ],
     // Patterns to exclude.
     exclude: [
