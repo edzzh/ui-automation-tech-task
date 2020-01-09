@@ -1,7 +1,7 @@
 {
   "name": "ui-automation-tech-task",
   "version": "1.0.0",
-  "description": "",
+  "description": "UI Automation Framework Using WDIOv5 & Cucumber",
   "main": "index.js",
   "scripts": {
     "test": "node_modules/.bin/wdio run ./wdio.conf.js",
@@ -13,9 +13,6 @@
   "keywords": [],
   "author": "Edgars Hartmanis",
   "license": "ISC",
-  "dependencies": {
-    "uuid": "^3.3.3"
-  },
   "devDependencies": {
     "@babel/cli": "^7.6.4",
     "@babel/core": "^7.6.4",
@@ -29,7 +26,7 @@
     "@wdio/spec-reporter": "^5.15.1",
     "@wdio/sync": "^5.15.1",
     "fs-extra": "^8.1.0",
-    "multiple-cucumber-html-reporter": "^1.13.1",
+    "uuid": "^3.3.3",
     "wdio-chromedriver-service": "^5.0.2",
     "wdio-cucumberjs-json-reporter": "^1.1.1"
   },
