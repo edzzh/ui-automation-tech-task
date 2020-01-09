@@ -111,7 +111,7 @@ Given(/^I have account created$/, () => {
   accountPage.setFirstName("Demo");
   accountPage.setLastName("User");
   accountPage.accountName.waitForDisplayed(
-    5000,
+    10000,
     false,
     `Couldn't find account name field`
   );
