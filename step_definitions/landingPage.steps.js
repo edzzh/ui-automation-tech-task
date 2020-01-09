@@ -104,12 +104,12 @@ Given(/^I have account created$/, () => {
     `Couldn't fin Login Form`
   );
 
-  loginPage.loginEmailInputField.setValue("tdl_test_email_000@gmail.com");
-  loginPage.loginPasswordInputField.setValue("Password1234");
+  loginPage.loginEmailInputField.setValue("user@phptravels.com");
+  loginPage.loginPasswordInputField.setValue("demouser");
   loginPage.loginUserButton.click();
 
-  accountPage.setFirstName("TDL_TEST_NAME_1980");
-  accountPage.setLastName("TDL_TEST_LASTNAME_1999");
+  accountPage.setFirstName("Demo");
+  accountPage.setLastName("User");
   accountPage.accountName.waitForDisplayed(
     5000,
     false,

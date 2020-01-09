@@ -25,6 +25,7 @@ When(/^I select "([^"]*)" adults and "([^"]*)" children$/, (adults, children) =>
   let adultsCount = bookingPage.adultsInput.getValue();
   let childCount = bookingPage.childrenInput.getValue();
 
+  // Validate Adult Count for booking
   if (adultsCount === parseInt(adults)) {
     return true;
   } else if (adultsCount < parseInt(adults)) {
@@ -40,6 +41,7 @@ When(/^I select "([^"]*)" adults and "([^"]*)" children$/, (adults, children) =>
     console.log('adults count is higher')
   }
 
+  // Validate Children Count for booking
   if (childCount === parseInt(children)) {
     return true;
   } else if (childCount < parseInt(children)) {
