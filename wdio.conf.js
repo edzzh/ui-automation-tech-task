@@ -4,17 +4,15 @@ const defaultTimeoutInterval = process.env.DEBUG ? (60 * 60 * 500) : 90000;
 exports.config = {
     runner: 'local',
 
-    // host: 'localhost',
     port: 4444,
     path: '/wd/hub',
 
     specs: [
-        './features/account-creation.feature',
+        './features/hotel-booking.feature',
     ],
-    // Patterns to exclude.
-    exclude: [
-        // 'path/to/excluded/files'
-    ],
+
+    exclude: [],
+
     //
     // ============
     // Capabilities

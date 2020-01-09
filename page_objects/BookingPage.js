@@ -21,8 +21,12 @@ class BookingPage extends Page{
   get addAdultsButton () { return $('(//button[@class="btn btn-white bootstrap-touchspin-up "])[1]'); }
   get addChildButton () { return $('(//button[@class="btn btn-white bootstrap-touchspin-up "])[2]');}
   get hotelsSearchButton () { return $('//form[@name="HOTELS"]//button[contains(text(),"Search")]');}
+
   get hotelResultList () { return $('ul[id="LIST"]')}
+  get firstHotelName () { return $('(//div[@class="product-long-item"]//div[@class="rtl-mr-auto"]/h5)[1]'); }
   get hotelDetailHeader () { return $('div[class="detail-header"]'); }
+  get hotelDetailHotelName () { return $('//h2[contains(@class, "name")]'); }
+  get hotelDetailRatings () {return $('div[class="rating-item rating-inline"]'); }
   get viewMoreHotelsButton () { return $('button[id="loadMore"]'); }
 
   get availableRoomsButton () { return $('//ul[@id="horizon-sticky-nav"]//li/a[text()="Available Rooms"]'); }
@@ -48,6 +52,7 @@ class BookingPage extends Page{
   get completeBookingButton () { return $('//button[text()="Complete Booking"]'); }
 
   get purchaseBookingPage () { return $('div[data-testid="protrudingHeader"]'); }
+  get purchaseBookingPriceTag () { return $('span[data-testid="productPrice"]'); }
 }
 
 export default new BookingPage();

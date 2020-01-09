@@ -3,8 +3,15 @@ import bookingPage from '../page_objects/BookingPage';
 import assert from "assert";
 
 let hotelPrice = null;
+let hotelName = null;
+let dest = null;
+let checkInDate = null;
+let checkOutDate = null;
+let adultCount = null;
+let childrenCount = null;
 
 When(/^I set up destination as "([^"]*)"$/, (destination) => {
+  dest = destination;
   bookingPage.destinationInput.click();
   browser.pause(1000);
   bookingPage.destinationInputField.setValue(destination);
@@ -21,6 +28,9 @@ When(/^I set up destination as "([^"]*)"$/, (destination) => {
 });
 
 When(/^I set dates "([^"]*)" - "([^"]*)"$/, (checkIn, checkOut) => {
+  checkInDate = checkIn;
+  checkOutDate = checkOut;
+
   bookingPage.checkInInput.click();
   bookingPage.checkInInput.setValue(checkIn);
   bookingPage.checkOutInput.click();
@@ -28,6 +38,9 @@ When(/^I set dates "([^"]*)" - "([^"]*)"$/, (checkIn, checkOut) => {
 });
 
 When(/^I select "([^"]*)" adults and "([^"]*)" children$/, (adults, children) => {
+  adultCount = adults;
+  childrenCount = children;
+
   let adultsCount = bookingPage.adultsInput.getValue();
   let childCount = bookingPage.childrenInput.getValue();
 
@@ -85,6 +98,8 @@ When(/^I click on "Details" for fist hotel in the list$/, () => {
     `HOTEL List is not displayed`
   );
 
+  hotelName = bookingPage.firstHotelName.getText();
+
   bookingPage.hotelResultList.$$('li')[0].$('button').click();
 });
 
@@ -94,6 +109,21 @@ When(/^"Details" page is opened for selected hotel$/, () => {
     false,
     `Details Header is not displayed`
   );
+
+  bookingPage.hotelDetailRatings.waitForDisplayed(
+    5000,
+    false,
+    `Ratings is not displayed`
+  );
+
+  assert.strictEqual(bookingPage.hotelDetailHotelName.getText(), hotelName);
+  assert.strictEqual(bookingPage.destinationSelectedResult.getText(), `latvia,${dest.toLowerCase()}`);
+  assert.strictEqual(bookingPage.checkInInput.getProperty("placeholder"), checkInDate);
+  assert.strictEqual(bookingPage.checkOutInput.getProperty("placeholder"), checkOutDate);
+  assert.strictEqual(bookingPage.adultsInput.getValue(), adultCount);
+
+  // Bug in homepage - Child count is set to zero
+  // assert.strictEqual(bookingPage.childrenInput.getValue(), childrenCount);
 });
 
 When(/^I click on "Book now" button for first available room$/, () => {
@@ -163,6 +193,12 @@ Then(/^"Purchase hotel booking" page is displayed$/, () => {
     false,
     `Purchase Booking Page is not displayed`
   );
+
+  bookingPage.purchaseBookingPriceTag.waitForDisplayed(
+    5000,
+    false,
+    `Purchase Booking Price is not displayed`
+  );
 });
 
 When(/^I click on Details for the cheapest hotel in the list with a rating above "([^"]*)" stars$/, (rating) => {
@@ -214,6 +250,9 @@ When(/^I click on Details for the cheapest hotel in the list with a rating above
       cheapestHotels.push(hotelResults[i]);
     }
   }
+
+  // Set hotel name for further validation
+  hotelName = cheapestHotels[0].$('div[class="rtl-mr-auto"] > h5 > a').getText();
 
   // Scroll To The Element and click
   cheapestHotels[0].$('button').scrollIntoView({behavior: "auto", block: "end", inline: "end"});
