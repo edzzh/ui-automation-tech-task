@@ -34,7 +34,7 @@ exports.config = {
     maxInstances: 10,
 
     capabilities: [
-      { browserName: 'chrome', maxInstances: 2 }
+      { browserName: 'chrome', maxInstances: 3 }
       ],
 
     // chromeDriverArgs: ['--port=9515', '--url-base=\'/\''], // default for ChromeDriver

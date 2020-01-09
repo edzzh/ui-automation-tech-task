@@ -7,11 +7,16 @@ let hotelPrice = null;
 When(/^I set up destination as "([^"]*)"$/, (destination) => {
   bookingPage.destinationInput.click();
   bookingPage.destinationInputField.setValue(destination);
-  bookingPage.destinationResultsUl.$$('li').map(destinations => {
-    if (destinations.$('div').$('span').getText() === destination) {
-      destinations.click()
-    }
+
+  const destinationElement = bookingPage.destinationResultsUl.$$('li').filter(destinations => {
+    return destinations.$('div').$('span').getText() === destination;
   });
+
+  destinationElement[0].click();
+
+  browser.waitUntil(() => {
+    return bookingPage.destinationSelectedResult.getText().includes(destination);
+  }, 5000, `Destination is not selected`);
 });
 
 When(/^I set dates "([^"]*)" - "([^"]*)"$/, (checkIn, checkOut) => {
@@ -151,4 +156,8 @@ Then(/^"Purchase hotel booking" page is displayed$/, () => {
     false,
     `Couldn't find Purchase Booking page`
   );
+});
+
+When(/^I click on Details for the cheapest hotel in the list with a rating above "([^"]*)" stars$/, (rating) => {
+
 });

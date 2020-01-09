@@ -12,6 +12,7 @@ class BookingPage extends Page{
   get destinationInput () { return $('div[id="s2id_autogen1"] > a'); }
   get destinationInputField () { return $('div[class="form-group"] > div > input[name="dest"]'); }
   get destinationResultsUl () { return $('//ul[contains(@class, "select2-result-sub")]'); }
+  get destinationSelectedResult () { return $('(//span[@class="select2-chosen"])[1]'); }
 
   get checkInInput () { return $(`//input[@id="checkin"]`); }
   get checkOutInput () { return $(`//input[@id="checkout"]`); }
