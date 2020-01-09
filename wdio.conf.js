@@ -9,7 +9,7 @@ exports.config = {
     path: '/wd/hub',
 
     specs: [
-        './features/cheapest-hotel-booking.feature',
+        './features/*.feature',
     ],
     // Patterns to exclude.
     exclude: [
@@ -33,9 +33,7 @@ exports.config = {
     //
     maxInstances: 10,
 
-    capabilities: [
-      { browserName: 'chrome', maxInstances: 3 }
-      ],
+    capabilities: [{ browserName: 'chrome', maxInstances: 3 }],
 
     // chromeDriverArgs: ['--port=9515', '--url-base=\'/\''], // default for ChromeDriver
     // chromeDriverLogs: './',
@@ -115,15 +113,8 @@ exports.config = {
       removeSync('./allure-results');
     },
     
-    before: function() {
-      /**
-       * Setup the Chai assertion framework
-       */
-      const chai    = require('chai');
-      global.expect = chai.expect;
-      global.assert = chai.assert;
-      global.should = chai.should();
-    },
+    // before: function() {
+    // },
     //
     // after: function (capabilities, specs) {
     //   //do your stuff
@@ -156,12 +147,5 @@ exports.config = {
       if (test.error !== undefined) {
         browser.takeScreenshot();
       }
-    },
-    
-    onComplete: function() {
-        // generate({
-        //     jsonDir: './reports/cucumber-json/',
-        //     reportPath: './reports/html'
-        // })
     }
 };

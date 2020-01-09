@@ -6,6 +6,7 @@ let hotelPrice = null;
 
 When(/^I set up destination as "([^"]*)"$/, (destination) => {
   bookingPage.destinationInput.click();
+  browser.pause(1000);
   bookingPage.destinationInputField.setValue(destination);
 
   const destinationElement = bookingPage.destinationResultsUl.$$('li').filter(destinations => {
@@ -100,15 +101,15 @@ When(/^I click on "Book now" button for first available room$/, () => {
 
   bookingPage.availableRoomsButton.click();
 
-  hotelPrice = bookingPage.hotelRoomPrice.getText();
+  hotelPrice = bookingPage.firstHotelRoomPrice.getText();
 
-  bookingPage.hotelRoomBookButton.waitForDisplayed(
+  bookingPage.firstHotelRoomBookButton.waitForDisplayed(
     5000,
     false,
     `Couldn't find BOOK button for first available room`
   );
 
-  bookingPage.hotelRoomBookButton.click();
+  bookingPage.firstHotelRoomBookButton.click();
 });
 
 Then(/^"Checkout" page is displayed$/, () => {
@@ -159,6 +160,14 @@ Then(/^"Purchase hotel booking" page is displayed$/, () => {
 });
 
 When(/^I click on Details for the cheapest hotel in the list with a rating above "([^"]*)" stars$/, (rating) => {
+  bookingPage.viewMoreHotelsButton.waitForDisplayed(
+    5000,
+    false,
+    `Couldn't find VIEW MORE button`
+  );
+
+  bookingPage.viewMoreHotelsButton.scrollIntoView({behavior: "auto", block: "center", inline: "center"});
+
   while (bookingPage.viewMoreHotelsButton.isDisplayed()) {
     bookingPage.viewMoreHotelsButton.waitForDisplayed(
       2000,
@@ -179,7 +188,7 @@ When(/^I click on Details for the cheapest hotel in the list with a rating above
   });
 
   // Store all available hotel prices
-  // Due to 155 RIGA records, I only went through 20 on every iteration
+  // Due to 155 avaiable hotel records in RIGA, I only went through 20 on every iteration
   let hotelPrices = [];
   for (let i = 0; i < hotelsThreeStarsOrAbove.length; i++) {
     for (let j = 0; j < 20; j++) {
@@ -191,7 +200,6 @@ When(/^I click on Details for the cheapest hotel in the list with a rating above
 
   // Get Lowest Hotel Price
   const lowestHotelPrice = Math.min.apply(Math, hotelPrices);
-  console.log(lowestHotelPrice);
 
   // Get the cheapest hotel by the definition
   let cheapestHotels = [];
@@ -201,11 +209,47 @@ When(/^I click on Details for the cheapest hotel in the list with a rating above
     }
   }
 
-  // Scroll To The Element
+  // Scroll To The Element and click
   cheapestHotels[0].$('button').scrollIntoView({behavior: "auto", block: "end", inline: "end"});
   cheapestHotels[0].$('button').click();
 });
 
 When(/^I click on "Book now" button for the cheapest available room in the hotel$/, () => {
+  bookingPage.availableRoomsButton.waitForDisplayed(
+    10000,
+    false,
+    `Couldn't find Available Rooms button`
+  );
 
+  bookingPage.availableRoomsButton.click();
+
+  // Store all hotel room prices
+  let hotelRoomPrices = [];
+  for (let i = 0; i < bookingPage.hotelRoomPrice.length; i++) {
+    hotelRoomPrices.push(parseFloat(bookingPage.hotelRoomPrice[i].getText()));
+  }
+
+  // Get Lowest Hotel Room Price
+  const lowestHotelRoomPrice = Math.min.apply(Math, hotelRoomPrices);
+  hotelPrice = lowestHotelRoomPrice;
+
+  // Store cheapest hotel room element by the lowest price
+  let cheapestRoom = null;
+  for (let i = 0; i < bookingPage.availableRoomsList.length; i++) {
+    let roomPrice = parseFloat(bookingPage.availableRoomsList[i].$(
+      'div > div:nth-child(2) > div > div:nth-child(2) > p > span'
+    ).getText());
+
+    if (roomPrice === lowestHotelRoomPrice) {
+      cheapestRoom = bookingPage.availableRoomsList[i];
+    }
+  }
+
+  // Scroll To The Element and click
+  cheapestRoom.$(
+    'div > div:nth-child(2) > div > div:nth-child(2) > form > button'
+  ).scrollIntoView({behavior: "auto", block: "center", inline: "center"});
+  cheapestRoom.$(
+    'div > div:nth-child(2) > div > div:nth-child(2) > form > button'
+  ).click();
 });

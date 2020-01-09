@@ -24,11 +24,12 @@ class BookingPage extends Page{
   get hotelResultList () { return $('ul[id="LIST"]')}
   get hotelDetailHeader () { return $('div[class="detail-header"]'); }
   get viewMoreHotelsButton () { return $('button[id="loadMore"]'); }
-  get hotelResultPrices () { return $('div[class="price"] > span'); }
 
   get availableRoomsButton () { return $('//ul[@id="horizon-sticky-nav"]//li/a[text()="Available Rooms"]'); }
-  get hotelRoomBookButton () { return $('//div[@class="room-item-wrapper"]/div[2]//button[text()="Book Now"]'); }
-  get hotelRoomPrice () { return $('//div[@class="room-item-wrapper"]/div[2]//span[contains(@class, "number")]'); }
+  get availableRoomsList () { return $$('div[class="room-item"]'); }
+  get firstHotelRoomBookButton () { return $('//div[@class="room-item-wrapper"]/div[2]//button[text()="Book Now"]'); }
+  get firstHotelRoomPrice () { return $('//div[@class="room-item-wrapper"]/div[2]//span[contains(@class, "number")]'); }
+  get hotelRoomPrice () { return $$('div > div:nth-child(2) > div > div:nth-child(2) > p > span'); }
 
   get hotelDetails () { return $('div[class="hotel_details_panel__checkout"]')}
   get hotelCheckInDate () { return $('div[class="hotel_details_panel__checkout"] > ul > li:first-child > span'); }
