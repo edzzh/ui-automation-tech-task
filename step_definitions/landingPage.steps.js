@@ -48,7 +48,7 @@ Then(/^I setup language property as "([^"]*)"$/, (languageValue) => {
 });
 
 Then(/^setup currency property as "([^"]*)"$/, (currencyValue) => {
-  if (landingPage.activeCurrencyAnchor.getText() !== currencyValue) {
+  if (landingPage.activeCurrencyAnchor.getText() !== currencyValue.toUpperCase()) {
     landingPage.currencyDropdownButton.click();
     landingPage.currencyDropdown.waitForDisplayed(
       5000,
