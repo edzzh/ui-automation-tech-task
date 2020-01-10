@@ -21,7 +21,11 @@ class AccountPage extends Page {
   get myProfileLastNameInput () { return $('input[name="lastname"]'); }
   get myProfileEmailInput () { return $('input[name="email"]'); }
   get myProfileMobileInput () { return $('input[name="phone"]'); }
-
+  
+  /*
+    Initial Element Setters
+   */
+  
   setFirstName(name) {
     this.firstName = name;
   }
